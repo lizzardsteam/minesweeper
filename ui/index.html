@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="http://localhost:3000/public/main.js"></script>
+    <style>
+        html {
+            background-color: #FFEFEF;
+        }
+
+        .minesweeper-cell {
+            width: 60px;
+            height: 40px;
+            background-color: pink;
+            border: 1px solid black;
+            display: flex;
+            margin: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .minesweeper-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #minesweeper-board {
+            display: flex;
+            flex-direction: row;
+        }
+
+        #minesweeper-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="minesweeper-wrapper">
+        <div id="minesweeper-board">
+            <!-- Leave this blank -->
+        </div>
+    </div>
+
+</body>
+
+</html>
