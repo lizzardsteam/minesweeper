@@ -42,6 +42,12 @@ export class Board implements BoardInterface {
             if (bombsPlaced === this.totalBombs) {
                 break
             }
+
+            // Make sure the cell is never undefined.
+            if (cell === (this.size ** 2)) {
+                cell = 0
+            }
+
             if (this.board[cell].isBomb) {
                 continue
             }
@@ -52,7 +58,7 @@ export class Board implements BoardInterface {
                 this.board[cell].isBomb = isBomb
             }
 
-            if (bombsPlaced < this.totalBombs && cell === (this.size ** 2) - 1) {
+            if ((bombsPlaced < this.totalBombs && cell === (this.size ** 2) - 1)) {
                 cell = 0
             }
         }
