@@ -57,4 +57,31 @@ export class Board implements BoardInterface {
             }
         }
     }
+
+    public placeCellBombsInProximityValues(): void {
+        this.board.map((cell, index) => {
+            if (!cell.isBomb) {
+                for (let xOffset = -1; xOffset <= 1; xOffset++) {
+                    for (let yOffset = -1; yOffset <= 1; yOffset++) {
+                        let currentCell = this.findCell(cell.x + xOffset, cell.y + yOffset)
+                        if (currentCell !== null) {
+                            if (currentCell?.isBomb) {
+                                this.board[index].bombsInProximity += 1
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    public findCell(xAxis: number, yAxis: number): Cell | null {
+        let returnCell = this.board.find(cell => {
+            if (cell.x === xAxis && cell.y === yAxis) {
+                return cell
+            }
+        })
+
+        return returnCell ?? null
+    }
 }

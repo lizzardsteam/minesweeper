@@ -9,6 +9,7 @@ class Minesweeper {
         this.board.generateBoard()
         this.board.setTotalBombs(totalBombs)
         this.board.placeBombs()
+        this.board.placeCellBombsInProximityValues()
     }
 
     public printBoard() {
