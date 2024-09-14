@@ -1,0 +1,13 @@
+{
+  "name": "minesweeper",
+  "version": "0.1.0",
+  "description": "",
+  "main": "bin/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "play": "node ./bin/main.js"
+  },
+  "keywords": [],
+  "author": "Stefan Dimov",
+  "license": "ISC"
+}
