@@ -1,6 +1,7 @@
-import Minesweeper from "./Entities/Minesweeper";
+import Minesweeper from "./Entities/Minesweeper"
 
-let boardSize: number = 5
-let totalBombs: number = 8
+const boardSize: number = 5
+const totalBombs: number = 8
 
-new Minesweeper(boardSize, totalBombs)
+const game = new Minesweeper(boardSize, totalBombs)
+game.printBoard()

@@ -9,7 +9,10 @@ class Minesweeper {
         this.board.generateBoard()
         this.board.setTotalBombs(totalBombs)
         this.board.placeBombs()
-        console.log(this.board.board)
+    }
+
+    public printBoard() {
+        console.table(this.board.board)
     }
 }
 
