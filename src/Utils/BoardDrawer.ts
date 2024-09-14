@@ -12,7 +12,7 @@ export default class BoardDrawer {
         let cell = this.board.findCell(x, y)
         if (cell !== null) {
             if (cell.isBomb) {
-                return "B"
+                return "&#x1f4a3;"
             } else {
                 return cell.bombsInProximity.toString()
             }
@@ -32,7 +32,6 @@ export default class BoardDrawer {
                     htmlElement.innerHTML += `<div class="minesweeper-column">${elementToAppend}</div>`
                 }
             }
-            console.log(htmlElement)
         })
     }
 }
