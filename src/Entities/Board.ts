@@ -1,5 +1,5 @@
-import BombRNG from "../Utils/BombRNG"
-import { Cell } from "./Cell"
+import BombRNG from "../Utils/BombRNG.js"
+import { Cell } from "./Cell.js"
 
 export interface BoardInterface {
     generateBoard(): void
