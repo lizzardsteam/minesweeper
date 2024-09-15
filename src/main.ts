@@ -1,7 +1,7 @@
 import Minesweeper from "./Entities/Minesweeper.js"
 
 const boardSize: number = 5
-const totalBombs: number = 4
+const totalBombs: number = 6
 
 const game = new Minesweeper(boardSize, totalBombs, gameOverCallback)
 game.drawBoard()
