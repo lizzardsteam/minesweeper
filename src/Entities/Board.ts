@@ -57,6 +57,11 @@ export class Board implements BoardInterface {
                 continue
             }
 
+            // Make sure all edge cells are safe.
+            if (cell === 0 || cell === this.size - 1 || cell === (this.size ** 2) - 1 || cell === (this.size ** 2) - 1 - this.size - 1) {
+                continue
+            }
+
             let isBomb = BombRNG.generate()
             if (isBomb) {
                 bombsPlaced += 1
