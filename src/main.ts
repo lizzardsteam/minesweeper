@@ -17,8 +17,10 @@ addEventListener("load", () => {
                 let index = findCellIndexByHtmlElementId(elementId)
                 if (index !== null) {
                     if (!game.board.board[index].isRevealed) {
-                        cellHtmlElement.innerHTML = game.revealCell(index)
-                        setSubheaderStatus()
+                        if (cellHtmlElement) {
+                            cellHtmlElement.innerHTML = game.revealCell(index)
+                            setSubheaderStatus()
+                        }
                     }
                 }
             })
