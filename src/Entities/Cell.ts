@@ -3,6 +3,7 @@ export class Cell {
     public y: number = 0
     public isBomb: boolean = false
     public bombsInProximity: number = 0
+    public isRevealed: boolean = false
 
     public setCoordinates(x: number, y: number): void {
         this.x = x
@@ -18,8 +19,9 @@ export class Cell {
     }
 
     public revealCell(): string {
+        this.isRevealed = true
         if (this.isBomb) {
-            return "Boom!"
+            return "&#x1f4a3;"
         } else {
             return this.bombsInProximity.toString()
         }

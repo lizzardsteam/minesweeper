@@ -39,12 +39,22 @@
             align-items: center;
             justify-content: center;
             min-height: 95vh;
+            flex-direction: column;
+        }
+
+        #minesweeper-header,
+        #minesweeper-subheader {
+            font-weight: 300;
+            margin-top: 0;
         }
     </style>
 </head>
 
 <body>
     <div id="minesweeper-wrapper">
+        <h1 id="minesweeper-header">Welcome to Minesweeper</h1>
+        <h3 id="minesweeper-subheader"></h3>
+        <br>
         <div id="minesweeper-board">
             <!-- Leave this blank -->
         </div>

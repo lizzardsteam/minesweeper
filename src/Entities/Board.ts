@@ -2,7 +2,12 @@ import BombRNG from "../Utils/BombRNG.js"
 import { Cell } from "./Cell.js"
 
 export interface BoardInterface {
+    setBoardSize(size: number): void
+    setTotalBombs(totalBombs: number): void
     generateBoard(): void
+    placeBombs(): void
+    placeCellBombsInProximityValues(): void
+    findCell(xAxis: number, yAxis: number): Cell | null
 }
 
 export class Board implements BoardInterface {
@@ -82,12 +87,23 @@ export class Board implements BoardInterface {
     }
 
     public findCell(xAxis: number, yAxis: number): Cell | null {
-        let returnCell = this.board.find(cell => {
+        let returnCell = this.board.find((cell: Cell) => {
             if (cell.x === xAxis && cell.y === yAxis) {
                 return cell
             }
         })
 
         return returnCell ?? null
+    }
+
+    public findCellIndex(xAxis: number, yAxis: number): number | null {
+        let returnIndex = null
+        this.board.find((cell: Cell, index: number) => {
+            if (cell.x === xAxis && cell.y === yAxis) {
+                returnIndex = index
+            }
+        })
+
+        return returnIndex
     }
 }

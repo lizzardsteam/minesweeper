@@ -1,4 +1,5 @@
 import { Board } from "../Entities/Board.js";
+import { Cell } from "../Entities/Cell.js";
 
 export default class BoardDrawer {
     public board: Board
@@ -27,7 +28,7 @@ export default class BoardDrawer {
                 for (let x = 0; x < this.board.size; x++) {
                     let elementToAppend: string = ""
                     for (let y = 0; y < this.board.size; y++) {
-                        elementToAppend += `<div class="minesweeper-cell">${this.getCellContnet(x + 1, y + 1)}</div>`
+                        elementToAppend += `<div class="minesweeper-cell" id="x-${x + 1}_y-${y + 1}"></div>`
                     }
                     htmlElement.innerHTML += `<div class="minesweeper-column">${elementToAppend}</div>`
                 }
