@@ -5,7 +5,6 @@ const totalBombs: number = 8
 
 const game = new Minesweeper(boardSize, totalBombs, gameOverCallback)
 game.drawBoard()
-setSubheaderStatus()
 
 // Handle cell clicks.
 addEventListener("load", () => {

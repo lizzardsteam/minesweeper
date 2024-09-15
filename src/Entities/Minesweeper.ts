@@ -40,7 +40,7 @@ class Minesweeper {
         this.gameStatus = `Total bombs: ${this.board.totalBombs}; Cells left to reveal ${(this.board.size ** 2) - cellsRevealed - this.board.totalBombs};`
 
         // Handle winning the game.
-        if (cellsRevealed === this.board.size) {
+        if (cellsRevealed === ((this.board.size ** 2) - this.board.totalBombs)) {
             this.isOver = true
             this.gameStatus = GAME_WON_MSG
         }
@@ -57,7 +57,6 @@ class Minesweeper {
 
         return returnValue
     }
-
 }
 
 export default Minesweeper
