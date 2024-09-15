@@ -1,6 +1,11 @@
 import BombRNG from "../Utils/BombRNG.js"
 import { Cell } from "./Cell.js"
 
+const ALLOW_BOMBS_ON_EDGES: boolean = false
+
+const NEGATIVE_SIZE_ERROR_MSG = "Board size cannot be less than 2."
+const ZERO_SIZE_ERROR_MSG = "There must be at least 1 bomb on the board."
+
 export interface BoardInterface {
     setBoardSize(size: number): void
     setTotalBombs(totalBombs: number): void
@@ -24,8 +29,8 @@ export class Board implements BoardInterface {
     }
 
     public generateBoard(): void {
-        if (this.size <= 0) {
-            throw new Error("Board size cannot be less than 0.")
+        if (this.size <= 2) {
+            throw new Error(NEGATIVE_SIZE_ERROR_MSG)
         }
 
         for (let x = 0; x < this.size; x++) {
@@ -39,7 +44,7 @@ export class Board implements BoardInterface {
 
     public placeBombs(): void {
         if (this.totalBombs <= 0) {
-            throw new Error("There must be at least 1 bomb on the board.")
+            throw new Error(ZERO_SIZE_ERROR_MSG)
         }
 
         let bombsPlaced: number = 0
@@ -57,9 +62,10 @@ export class Board implements BoardInterface {
                 continue
             }
 
-            // Make sure all edge cells are safe.
-            if (cell === 0 || cell === this.size - 1 || cell === (this.size ** 2) - 1 || cell === (this.size ** 2) - 1 - this.size - 1) {
-                continue
+            if (!ALLOW_BOMBS_ON_EDGES) {
+                if (cell === 0 || cell === this.size - 1 || cell === (this.size ** 2) - 1 || cell === (this.size ** 2) - this.size) {
+                    continue
+                }
             }
 
             let isBomb = BombRNG.generate()

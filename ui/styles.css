@@ -1,0 +1,45 @@
+:root {
+    --light-pink: #FFEFEF;
+    --main-pink: #ffc3c3;
+}
+
+html {
+    background-color: var(--light-pink);
+}
+
+.minesweeper-cell {
+    width: 60px;
+    height: 40px;
+    background-color: var(--main-pink);
+    border: 1px solid black;
+    display: flex;
+    margin: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.minesweeper-column {
+    display: flex;
+    flex-direction: column;
+}
+
+#minesweeper-board {
+    display: flex;
+    flex-direction: row;
+}
+
+#minesweeper-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 95vh;
+    flex-direction: column;
+}
+
+#minesweeper-header,
+#minesweeper-subheader {
+    font-weight: 300;
+    margin-top: 0;
+}

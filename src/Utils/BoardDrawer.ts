@@ -1,5 +1,4 @@
 import { Board } from "../Entities/Board.js";
-import { Cell } from "../Entities/Cell.js";
 
 export default class BoardDrawer {
     public board: Board

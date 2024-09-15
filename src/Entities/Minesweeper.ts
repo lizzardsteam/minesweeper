@@ -29,7 +29,6 @@ class Minesweeper {
     }
 
     public revealCell(index: number): string {
-
         let cellsRevealed: number = 0
         for (let i = 0; i < (this.board.size ** 2); i++) {
             if (this.board.board[i].isRevealed) {

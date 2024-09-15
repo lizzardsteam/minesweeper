@@ -1,3 +1,5 @@
+export const BOMB_SYMBOL = "&#x1f4a3;"
+
 export class Cell {
     public x: number = 0
     public y: number = 0
@@ -21,7 +23,7 @@ export class Cell {
     public revealCell(): string {
         this.isRevealed = true
         if (this.isBomb) {
-            return "&#x1f4a3;"
+            return BOMB_SYMBOL
         } else {
             return this.bombsInProximity.toString()
         }
