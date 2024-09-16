@@ -1,4 +1,3 @@
-import BoardDrawer from "../Utils/BoardDrawer.js"
 import { Board } from "./Board.js"
 
 type GameOverFunctionCallbackType = () => void
@@ -21,11 +20,6 @@ class Minesweeper {
         this.board.placeBombs()
         this.board.placeCellBombsInProximityValues()
         this.gameOverCallback = gameOverCallback
-    }
-
-    public drawBoard() {
-        let drawer = new BoardDrawer(this.board)
-        drawer.draw()
     }
 
     public revealCell(index: number): string {

@@ -1,6 +1,7 @@
 import { Board } from "../Entities/Board.js";
+import { DrawerInterface } from "../types.js";
 
-export default class BoardDrawer {
+export default class BoardDrawer implements DrawerInterface {
     public board: Board
     private htmlElementId: string = "minesweeper-board"
 
@@ -8,19 +9,7 @@ export default class BoardDrawer {
         this.board = board
     }
 
-    public getCellContnet(x: number, y: number): string {
-        let cell = this.board.findCell(x, y)
-        if (cell !== null) {
-            if (cell.isBomb) {
-                return "&#x1f4a3;"
-            } else {
-                return cell.bombsInProximity.toString()
-            }
-        }
-        return "???"
-    }
-
-    public draw() {
+    public draw(): void {
         addEventListener("load", () => {
             let htmlElement = document.getElementById(this.htmlElementId)
             if (htmlElement) {

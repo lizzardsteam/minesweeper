@@ -1,10 +1,13 @@
 import Minesweeper from "./Entities/Minesweeper.js"
+import BoardDrawer from "./Utils/BoardDrawer.js"
 
 const boardSize: number = 5
 const totalBombs: number = 6
 
 const game = new Minesweeper(boardSize, totalBombs, gameOverCallback)
-game.drawBoard()
+
+let drawer = new BoardDrawer(game.board)
+drawer.draw()
 
 // Handle cell clicks.
 addEventListener("load", () => {
