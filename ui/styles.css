@@ -7,6 +7,11 @@ html {
     background-color: var(--light-pink);
 }
 
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 14px;
+}
+
 .minesweeper-cell {
     width: 60px;
     height: 40px;
@@ -33,8 +38,7 @@ html {
 #minesweeper-wrapper {
     display: flex;
     align-items: center;
-    justify-content: center;
-    min-height: 95vh;
+    margin-top: 25vh;
     flex-direction: column;
 }
 
@@ -42,4 +46,21 @@ html {
 #minesweeper-subheader {
     font-weight: 300;
     margin-top: 0;
+}
+
+.btn {
+    background-color: var(--main-pink);
+    border: 1px solid black;
+    padding: 10px;
+    min-width: 120px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.d-none {
+    display: none;
+}
+
+.d-block {
+    display: block;
 }
