@@ -5,13 +5,13 @@ const cors = require("cors")
 const app = express()
 const port = 3000
 
-app.use('/public', express.static('./bin'))
-app.use('/static', express.static('./ui'))
+app.use('/bin', express.static('./bin'))
+app.use('/public', express.static('./public'))
 
 app.use(cors())
 
 app.get('/', (req, res) => {
-    let indexFilePath = path.join(__dirname, "./ui/index.html")
+    let indexFilePath = path.join(__dirname, "./public/index.html")
     res.sendFile(indexFilePath)
 })
 
