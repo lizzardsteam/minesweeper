@@ -2,24 +2,33 @@ import { Board } from "./Board.js"
 
 type GameOverFunctionCallbackType = () => void
 
-const GAME_WON_MSG = "You won!"
-const GAME_LOST_MSG = "Game lost!"
+export const GAME_DEFAULT_MSG = "Minesweeper"
+export const GAME_WON_MSG = "You won!"
+export const GAME_LOST_MSG = "You detonated a mine!"
+
+const DEFAULT_GAME_STATUS = "Click on any cell to begin the game."
 
 class Minesweeper {
     public board: Board
     public isOver: boolean = false
-    public gameStatus: string = "Click on any cell to begin the game."
+    public gameStatus: string = ""
 
     public gameOverCallback: GameOverFunctionCallbackType
 
     public constructor(boardSize: number, totalBombs: number, gameOverCallback: GameOverFunctionCallbackType) {
         this.board = new Board()
         this.board.setBoardSize(boardSize)
-        this.board.generateBoard()
         this.board.setTotalBombs(totalBombs)
+        this.gameOverCallback = gameOverCallback
+    }
+
+    public play(): void {
+        this.gameStatus = DEFAULT_GAME_STATUS
+        this.isOver = false
+        this.board.board = []
+        this.board.generateBoard()
         this.board.placeBombs()
         this.board.placeCellBombsInProximityValues()
-        this.gameOverCallback = gameOverCallback
     }
 
     public revealCell(index: number): string {
