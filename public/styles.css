@@ -39,7 +39,7 @@ body {
 #minesweeper-wrapper {
     display: flex;
     align-items: center;
-    margin-top: 25vh;
+    margin-top: 20vh;
     flex-direction: column;
 }
 
@@ -65,4 +65,10 @@ body {
 
 .d-block {
     display: block;
+}
+
+@media only screen and (max-width: 600px) {
+    #minesweeper-wrapper {
+        min-height: 90vh;
+    }
 }
