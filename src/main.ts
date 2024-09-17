@@ -1,4 +1,4 @@
-import Minesweeper, { GAME_DEFAULT_MSG, GAME_LOST_MSG } from "./Entities/Minesweeper.js"
+import Minesweeper, { GAME_DEFAULT_MSG } from "./Entities/Minesweeper.js"
 import BoardDrawer from "./Utils/BoardDrawer.js"
 
 const boardSize: number = 6
