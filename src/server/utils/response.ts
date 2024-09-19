@@ -1,4 +1,5 @@
-import { ResponseType, ResponseWriter } from "./ResponseWriter";
+import { ResponseWriter } from "./ResponseWriter"
+import { Response } from "express"
 
 export const HttpStatus = {
     INTERNAL_ERROR: 500,
@@ -6,14 +7,14 @@ export const HttpStatus = {
     SUCCESS: 200
 }
 
-export function handleInternalError(): ResponseType<null> {
-    return ResponseWriter.write(null, HttpStatus.INTERNAL_ERROR, "Inernal server error. Please try again in a couple of seconds!")
+export function handleInternalError(res: Response): void {
+    res.status(HttpStatus.INTERNAL_ERROR).json(ResponseWriter.write(null, 1, "Inernal server error. Please try again in a couple of seconds!"))
 }
 
-export function handleBadRequest(message: string): ResponseType<null> {
-    return ResponseWriter.write(null, HttpStatus.BAD_REQUEST, message)
+export function handleBadRequest(res: Response, errorCode: number, message: string): void {
+    res.status(HttpStatus.BAD_REQUEST).json(ResponseWriter.write(null, errorCode, message))
 }
 
-export function handleSuccess<DataType>(data: DataType, message: string): ResponseType<DataType> {
-    return ResponseWriter.write(data, HttpStatus.SUCCESS, message)
+export function handleSuccess<DataType>(res: Response, data: DataType, message: string): void {
+    res.status(HttpStatus.SUCCESS).json(ResponseWriter.write(data, 0, message))
 }
