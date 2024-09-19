@@ -8,13 +8,16 @@ export const HttpStatus = {
 }
 
 export function handleInternalError(res: Response): void {
+    res.setHeader("Content-Type", "application/json")
     res.status(HttpStatus.INTERNAL_ERROR).json(ResponseWriter.write(null, 1, "Inernal server error. Please try again in a couple of seconds!"))
 }
 
 export function handleBadRequest(res: Response, errorCode: number, message: string): void {
+    res.setHeader("Content-Type", "application/json")
     res.status(HttpStatus.BAD_REQUEST).json(ResponseWriter.write(null, errorCode, message))
 }
 
 export function handleSuccess<DataType>(res: Response, data: DataType, message: string): void {
+    res.setHeader("Content-Type", "application/json")
     res.status(HttpStatus.SUCCESS).json(ResponseWriter.write(data, 0, message))
 }
