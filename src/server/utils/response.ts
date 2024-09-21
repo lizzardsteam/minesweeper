@@ -4,7 +4,14 @@ import { Response } from "express"
 export const HttpStatus = {
     INTERNAL_ERROR: 500,
     BAD_REQUEST: 400,
-    SUCCESS: 200
+    SUCCESS: 200,
+    CREATED: 201,
+    ACCEPTED: 202,
+    UNAUTHORIZED: 401,
+    FORBIDDEN: 403,
+    NOT_FOUND: 404,
+    NOT_ACCEPTABLE: 406,
+    SERVICE_UNAVAILABLE: 503,
 }
 
 export function handleInternalError(res: Response): void {
