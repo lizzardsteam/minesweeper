@@ -3,11 +3,13 @@ export default class User {
     public username: string
     public email: string
     public passwordHash: string
+    public createdAt: Date
 
-    public constructor(username: string, email: string) {
-        this.id = 0
+    public constructor(id: number, username: string, email: string, passwordHash: string) {
+        this.id = id
         this.username = username
         this.email = email
-        this.passwordHash = ""
+        this.passwordHash = passwordHash
+        this.createdAt = new Date()
     }
 }
