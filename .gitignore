@@ -1,5 +1,6 @@
 node_modules
-bin
+server/bin
+client/bin
 logs/*
 
 .DS_Store

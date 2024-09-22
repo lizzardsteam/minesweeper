@@ -5,7 +5,7 @@
   "main": "bin/main.js",
   "scripts": {
     "test": "jest ./bin",
-    "play": "tsc && node server.js"
+    "server": "tsc && node ./bin/server/main.js"
   },
   "keywords": [],
   "author": "Stefan Dimov",
