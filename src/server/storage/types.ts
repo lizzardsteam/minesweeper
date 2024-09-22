@@ -1,5 +1,5 @@
 export interface StorageCreation {
-    Create(): boolean
+    Create(): boolean | string
 }
 
 export interface StorageUpdate {
