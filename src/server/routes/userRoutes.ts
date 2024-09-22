@@ -7,6 +7,7 @@ import { v7 as uuidv7, validate as uuidValidate } from "uuid"
 import { handleBadRequest, handleSuccess, ServerResponseStatus } from "../utils/response"
 import { isEmailValid, isPasswordValid, isUsernameValid } from "../utils/validators"
 import { RequestWithLogger } from "./types"
+import databases from "../database/databases"
 
 const router = express.Router()
 
@@ -31,7 +32,11 @@ router.post('/login', (req: RequestWithLogger, res: Response) => {
         user = storage.FindByUsername(loginCredentials.username)
 
         if (PasswordHasher.validatePassword(loginCredentials.password, user.passwordHash)) {
-            res.cookie(serverConfig.authCookieName, uuidv7(), { httpOnly: true, maxAge: (1000 * 60 * 60 * 24) * 30 })
+            let sessionToken = uuidv7()
+            databases.userSessions.set(sessionToken, user.id)
+
+            res.cookie(serverConfig.authCookieName, sessionToken, { httpOnly: true, maxAge: (1000 * 60 * 60 * 24) * 30 })
+
             handleSuccess(res, null, "Login successful")
             return
         }
@@ -44,12 +49,14 @@ router.post("/register", (req: RequestWithLogger, res: Response) => {
     let regCredentials: RegistrationCredentialsType = req.body
 
     if (!regCredentials.email || !regCredentials.username || !regCredentials.password) {
-        handleBadRequest(res, ServerResponseStatus.AuthCredentialsNotValid, "Registration credentials are not valid.")
+        handleSuccess(res, null, "User already exists.")
+        // handleBadRequest(res, ServerResponseStatus.AuthCredentialsNotValid, "Registration credentials are not valid.")
         return
     }
 
     if (!isEmailValid(regCredentials.email) || !isUsernameValid(regCredentials.username) || !isPasswordValid(regCredentials.password)) {
-        handleBadRequest(res, ServerResponseStatus.AuthCredentialsNotValid, "Registration credentials are not valid.")
+        handleSuccess(res, null, "User already exists.")
+        // handleBadRequest(res, ServerResponseStatus.AuthCredentialsNotValid, "Registration credentials are not valid.")
         return
     }
 
@@ -66,7 +73,8 @@ router.post("/register", (req: RequestWithLogger, res: Response) => {
         }
     } catch (e: Error | unknown) {
         if (e) {
-            handleBadRequest(res, ServerResponseStatus.UsernameOrEmailAlreadyExist, "User already exists.")
+            handleSuccess(res, null, "User already exists.")
+            // handleBadRequest(res, ServerResponseStatus.UsernameOrEmailAlreadyExist, "User already exists.")
             return
         }
     }
