@@ -1,11 +1,10 @@
 {
   "name": "minesweeper",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "",
   "main": "bin/main.js",
   "scripts": {
-    "test": "jest ./bin",
-    "server": "tsc && node ./bin/server/main.js"
+    "test": "jest ./server/bin"
   },
   "keywords": [],
   "author": "Stefan Dimov",
