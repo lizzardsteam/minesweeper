@@ -13,7 +13,7 @@ import AuthOnlyRouteMiddleware from "./middleware/AuthOnlyMiddleware"
 import { RequestWithLogger } from "./routes/types"
 import Minesweeper from "./models/minesweeper/Minesweeper"
 import databases from "./database/databases"
-import { v7 as uuidv7, validate as uuidValidate } from "uuid"
+import { validate as uuidValidate } from "uuid"
 import UserStorage from "./storage/UserStorage"
 import User from "./models/users/User"
 
@@ -40,8 +40,6 @@ server.get('/', [AuthOnlyRouteMiddleware], (req: RequestWithLogger, res: Respons
         "OK")
 })
 
-// TODO: At first store games inside a Map<uuidv7, Board>.
-
 // Authentication routes
 server.use("/", userRoutes)
 
@@ -53,7 +51,7 @@ server.get('/game', [AuthOnlyRouteMiddleware], (req: RequestWithLogger, res: Res
     let isAuthCookieValid = uuidValidate(authCookie)
     if (isAuthCookieValid) {
         let userStorage = new UserStorage(new User("", "", "", ""))
-        let userId = databases.userSessions.get(authCookie)
+        let userId = databases.userTokens.get(authCookie)
         if (userId) {
             let user = userStorage.FindById(userId)
             if (user !== null) {

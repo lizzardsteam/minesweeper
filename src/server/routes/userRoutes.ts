@@ -33,7 +33,7 @@ router.post('/login', (req: RequestWithLogger, res: Response) => {
 
         if (PasswordHasher.validatePassword(loginCredentials.password, user.passwordHash)) {
             let sessionToken = uuidv7()
-            databases.userSessions.set(sessionToken, user.id)
+            databases.userTokens.set(sessionToken, user.id)
 
             res.cookie(serverConfig.authCookieName, sessionToken, { httpOnly: true, maxAge: (1000 * 60 * 60 * 24) * 30 })
 
@@ -49,14 +49,12 @@ router.post("/register", (req: RequestWithLogger, res: Response) => {
     let regCredentials: RegistrationCredentialsType = req.body
 
     if (!regCredentials.email || !regCredentials.username || !regCredentials.password) {
-        handleSuccess(res, null, "User already exists.")
-        // handleBadRequest(res, ServerResponseStatus.AuthCredentialsNotValid, "Registration credentials are not valid.")
+        handleBadRequest(res, ServerResponseStatus.AuthCredentialsNotValid, "Registration credentials are not valid.")
         return
     }
 
     if (!isEmailValid(regCredentials.email) || !isUsernameValid(regCredentials.username) || !isPasswordValid(regCredentials.password)) {
-        handleSuccess(res, null, "User already exists.")
-        // handleBadRequest(res, ServerResponseStatus.AuthCredentialsNotValid, "Registration credentials are not valid.")
+        handleBadRequest(res, ServerResponseStatus.AuthCredentialsNotValid, "Registration credentials are not valid.")
         return
     }
 
@@ -73,8 +71,7 @@ router.post("/register", (req: RequestWithLogger, res: Response) => {
         }
     } catch (e: Error | unknown) {
         if (e) {
-            handleSuccess(res, null, "User already exists.")
-            // handleBadRequest(res, ServerResponseStatus.UsernameOrEmailAlreadyExist, "User already exists.")
+            handleBadRequest(res, ServerResponseStatus.UsernameOrEmailAlreadyExist, "User already exists.")
             return
         }
     }
