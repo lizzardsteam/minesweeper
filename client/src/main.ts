@@ -1,5 +1,5 @@
-import Minesweeper, { GAME_DEFAULT_MSG } from "./Entities/Minesweeper.js"
-import BoardDrawer from "./Utils/BoardDrawer.js"
+import Minesweeper, { GAME_DEFAULT_MSG } from "./entities/Minesweeper.js"
+import BoardDrawer from "./utils/BoardDrawer.js"
 
 const boardSize: number = 5
 const totalBombs: number = 6

@@ -4,17 +4,32 @@
   "description": "",
   "main": "bin/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "play": "tsc && node server.js"
+    "test": "jest ./bin",
+    "server": "tsc && node ./bin/server/main.js"
   },
   "keywords": [],
   "author": "Stefan Dimov",
   "license": "ISC",
   "dependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/cookie-parser": "^1.4.7",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "@types/morgan": "^1.9.9",
     "@types/node": "^22.5.5",
+    "@types/uuid": "^10.0.0",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "express": "^4.21.0"
+    "express": "^4.21.0",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
+    "pino": "^9.4.0",
+    "pino-pretty": "^11.2.2",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.13",
+    "jest": "^29.7.0"
   }
 }

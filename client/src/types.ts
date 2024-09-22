@@ -1,4 +1,4 @@
-import { Cell } from "./Entities/Cell"
+import { Cell } from "./entities/Cell.js"
 
 export interface BoardInterface {
     setBoardSize(size: number): void

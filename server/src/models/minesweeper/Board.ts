@@ -1,13 +1,12 @@
-import { BoardInterface } from "../types.js"
-import BombRNG from "../Utils/BombRNG.js"
-import { Cell } from "./Cell.js"
+import BombRNG from "../../utils/BombRNG"
+import { Cell } from "./Cell"
 
 const ALLOW_BOMBS_ON_EDGES: boolean = false
 
 const NEGATIVE_SIZE_ERROR_MSG = "Board size cannot be less than 2."
 const ZERO_SIZE_ERROR_MSG = "There must be at least 1 bomb on the board."
 
-export class Board implements BoardInterface {
+export class Board  {
     public board: Array<Cell> = []
     public size: number = 0
     public totalBombs: number = 0

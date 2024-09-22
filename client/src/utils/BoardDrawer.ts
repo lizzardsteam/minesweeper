@@ -1,4 +1,4 @@
-import { Board } from "../Entities/Board.js";
+import { Board } from "../entities/Board.js";
 import { DrawerInterface } from "../types.js";
 
 export default class BoardDrawer implements DrawerInterface {
