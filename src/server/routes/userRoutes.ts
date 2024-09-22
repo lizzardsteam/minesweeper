@@ -4,8 +4,9 @@ import UserStorage from "../storage/UserStorage"
 import PasswordHasher from "../utils/PasswordHasher"
 import { serverConfig } from "../config/server"
 import { v7 as uuidv7, validate as uuidValidate } from "uuid"
-import { handleBadRequest, handleSuccess } from "../utils/response"
+import { handleBadRequest, handleSuccess, ServerResponseStatus } from "../utils/response"
 import { isEmailValid, isPasswordValid, isUsernameValid } from "../utils/validators"
+import { RequestWithLogger } from "./types"
 
 const router = express.Router()
 
@@ -20,7 +21,7 @@ type RegistrationCredentialsType = {
     email: string
 }
 
-router.post('/login', (req: Request, res: Response) => {
+router.post('/login', (req: RequestWithLogger, res: Response) => {
     // Create new auth cookie.
     let loginCredentials: LoginCredentialsType = req.body
 
@@ -36,19 +37,19 @@ router.post('/login', (req: Request, res: Response) => {
         }
     }
 
-    handleBadRequest(res, 4, "Username or password is incorrect.")
+    handleBadRequest(res, ServerResponseStatus.AuthCredentialsNotValid, "Username or password is incorrect.")
 })
 
-router.post("/register", (req: Request, res: Response) => {
+router.post("/register", (req: RequestWithLogger, res: Response) => {
     let regCredentials: RegistrationCredentialsType = req.body
 
     if (!regCredentials.email || !regCredentials.username || !regCredentials.password) {
-        handleBadRequest(res, 2, "Registration credentials are not valid.")
+        handleBadRequest(res, ServerResponseStatus.AuthCredentialsNotValid, "Registration credentials are not valid.")
         return
     }
 
     if (!isEmailValid(regCredentials.email) || !isUsernameValid(regCredentials.username) || !isPasswordValid(regCredentials.password)) {
-        handleBadRequest(res, 2, "Registration credentials are not valid.")
+        handleBadRequest(res, ServerResponseStatus.AuthCredentialsNotValid, "Registration credentials are not valid.")
         return
     }
 
@@ -58,26 +59,27 @@ router.post("/register", (req: Request, res: Response) => {
         let userId = storage.Create()
 
         if (uuidValidate(userId)) {
+            req.logger?.info(`New user created with username ${user.username} and id ${userId}.`)
             handleSuccess(res, {
                 userId: userId
             }, "OK")
         }
     } catch (e: Error | unknown) {
         if (e) {
-            handleBadRequest(res, 5, "User already exists.")
+            handleBadRequest(res, ServerResponseStatus.UsernameOrEmailAlreadyExist, "User already exists.")
             return
         }
     }
 })
 
-router.get("/users", (req: Request, res: Response) => {
+router.get("/users", (req: RequestWithLogger, res: Response) => {
     let storage = new UserStorage(new User("", "", "", ""))
     console.table(storage.FindAll())
 
     handleSuccess(res, null, "OK")
 })
 
-router.get('/logout', (req: Request, res: Response) => {
+router.get('/logout', (req: RequestWithLogger, res: Response) => {
     // Delete auth cookie.
     res.clearCookie(serverConfig.authCookieName)
     handleSuccess(res,

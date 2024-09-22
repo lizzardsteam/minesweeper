@@ -14,6 +14,13 @@ export const HttpStatus = {
     SERVICE_UNAVAILABLE: 503,
 }
 
+export const ServerResponseStatus = {
+    OK: 0,
+    Unauthenticated: 1,
+    AuthCredentialsNotValid: 2,
+    UsernameOrEmailAlreadyExist: 3,
+}
+
 export function handleInternalError(res: Response): void {
     res.setHeader("Content-Type", "application/json")
     res.status(HttpStatus.INTERNAL_ERROR).json(ResponseWriter.write(null, 1, "Inernal server error. Please try again in a couple of seconds!"))
