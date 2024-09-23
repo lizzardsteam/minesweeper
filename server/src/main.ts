@@ -44,6 +44,11 @@ server.get('/', [AuthOnlyRouteMiddleware], (req: RequestWithLogger, res: Respons
 server.use("/", userRoutes)
 
 server.get('/game', [AuthOnlyRouteMiddleware], (req: RequestWithLogger, res: Response) => {
+    /**
+     * TODO
+     * 1. Create new board of none exists or last game is complete.
+     * 2. Figure out how to track each click and the board and return data to the client.
+     */
     let game = new Minesweeper(10, 24, () => { })
     game.play()
 
@@ -59,7 +64,7 @@ server.get('/game', [AuthOnlyRouteMiddleware], (req: RequestWithLogger, res: Res
             }
         }
 
-        handleSuccess(res, { board: game.board, message: "Game created." }, "New game started.")
+        handleSuccess(res, { game: game, message: "Game created." }, "New game started.")
         return
     }
 
