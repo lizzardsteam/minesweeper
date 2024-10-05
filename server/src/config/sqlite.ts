@@ -1,1 +1,3 @@
-export const sqliteConfig = {}
+export const sqliteConfig = {
+    path: "./database/minesweeper.db"
+}
