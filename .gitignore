@@ -2,5 +2,6 @@ node_modules
 server/bin
 client/bin
 logs/*
+minesweeper.db
 
 .DS_Store
